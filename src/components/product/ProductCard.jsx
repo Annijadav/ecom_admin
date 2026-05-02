@@ -44,9 +44,11 @@ const ProductCard = ({
         <div className="aspect-w-16 aspect-h-9 bg-gray-200 overflow-hidden">
           {product.primaryImage ? (
             <img
-              src={`${import.meta.env.VITE_BASE_URL}${
-                product.primaryImage.url
-              }`}
+              src={
+                product.primaryImage.url.startsWith("http")
+                  ? product.primaryImage.url
+                  : `${import.meta.env.VITE_BASE_URL}${product.primaryImage.url}`
+              }
               alt={product.name}
               className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"

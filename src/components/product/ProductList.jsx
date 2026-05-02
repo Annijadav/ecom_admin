@@ -842,7 +842,7 @@ const ProductList = () => {
                         <div className="flex-shrink-0 h-8 w-8 relative">
                           {product.variants?.[0]?.images?.[0]?.url
                             ? (() => {
-                                const mediaUrl = `${import.meta.env.VITE_BASE_URL}${product.variants[0].images[0].url}`;
+                                const mediaUrl = product.variants[0].images[0].url.startsWith("http") ? product.variants[0].images[0].url : `${import.meta.env.VITE_BASE_URL}${product.variants[0].images[0].url}`;
                                 const isVideo = /\.(mp4|webm|ogg)$/i.test(
                                   mediaUrl
                                 );
