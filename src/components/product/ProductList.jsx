@@ -842,7 +842,12 @@ const ProductList = () => {
                         <div className="flex-shrink-0 h-8 w-8 relative">
                           {product.variants?.[0]?.images?.[0]?.url
                             ? (() => {
-                                const mediaUrl = product.variants[0].images[0].url.startsWith("http") ? product.variants[0].images[0].url : `${import.meta.env.VITE_BASE_URL}${product.variants[0].images[0].url}`;
+                                let mediaUrl = product.variants?.[0]?.images?.[0]?.url;
+                                if (mediaUrl && mediaUrl.includes('res.cloudinary.com')) {
+                                  mediaUrl = 'https://' + mediaUrl.substring(mediaUrl.indexOf('res.cloudinary.com'));
+                                } else if (mediaUrl) {
+                                  mediaUrl = mediaUrl.startsWith("http") ? mediaUrl : `${import.meta.env.VITE_BASE_URL}${mediaUrl}`;
+                                }
                                 const isVideo = /\.(mp4|webm|ogg)$/i.test(
                                   mediaUrl
                                 );

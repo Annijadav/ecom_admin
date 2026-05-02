@@ -45,7 +45,9 @@ const ProductCard = ({
           {product.primaryImage ? (
             <img
               src={
-                product.primaryImage.url.startsWith("http")
+                product.primaryImage.url.includes('res.cloudinary.com')
+                  ? 'https://' + product.primaryImage.url.substring(product.primaryImage.url.indexOf('res.cloudinary.com'))
+                  : product.primaryImage.url.startsWith("http")
                   ? product.primaryImage.url
                   : `${import.meta.env.VITE_BASE_URL}${product.primaryImage.url}`
               }
